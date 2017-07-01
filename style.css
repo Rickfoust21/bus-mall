@@ -1,0 +1,19 @@
+h1 {
+  font-family: fantasy;
+  font-size: 40;
+  text-align: center;
+}
+
+div {
+  background-color: #B8860B;
+}
+
+body {
+  background-color: #DEB887;
+}
+
+h2 {
+  text-align: center;
+  border-color: black;
+  border-style: solid;
+}
