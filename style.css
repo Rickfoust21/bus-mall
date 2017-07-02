@@ -6,6 +6,7 @@ h1 {
 
 div {
   background-color: #B8860B;
+  background-size: 35%;
 }
 
 body {
@@ -16,4 +17,33 @@ h2 {
   text-align: center;
   border-color: black;
   border-style: solid;
+}
+
+#first-image {
+  border-width: 15px;
+  float: left;
+  border-style: groove;
+  width: 150;
+  padding: 25px;
+}
+
+#second-image {
+  border-width: 15px;
+  float: left;
+  border-style: groove;
+  width: 150;
+  padding: 25px;
+}
+
+#third-image {
+  border-width: 15px;
+  float: left;
+  border-style: groove;
+  width: 150;
+  padding: 25px;
+}
+img {
+  height: 380px;
+  width: 364px;
+
 }
