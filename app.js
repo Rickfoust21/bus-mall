@@ -14,6 +14,10 @@ function Image(name, path) {
 }
 var images = [];
 
+
+if(localStorage.data) {
+  allProducts = JSON.parse(localStorage.data);
+} else {
 var bag = new Image('bag', './assets/bag.jpg');
 var bathroom = new Image('bathroom', './assets/bathroom.jpg');
 var breakfast = new Image('breakfast', './assets/breakfast.jpg');
@@ -34,7 +38,7 @@ var unicorn = new Image('unicorn', './assets/unicorn.jpg');
 var usb = new Image('usb', './assets/usb.gif');
 var watercan = new Image('watercan', './assets/water-can.jpg');
 var wineGlass = new Image('wineGlass', './assets/wine-glass.jpg');
-
+}
 console.log(images);
 
 
@@ -86,7 +90,7 @@ function addEvent(event) {
   console.log(event.target.name);
   var targetVar = event.target.name;
 
-  for (var i = 0; i < 25; i++) {
+  for (var i = 0; i < images.length; i++) {
     var currentImage = images[i].name;
 
     if (currentImage === targetVar) {
@@ -95,6 +99,7 @@ function addEvent(event) {
       console.log(images[i]);
     }else{
       container.removeEventListener('click', handleClick);
+      localStorage.setItem('data', JSON.stringify(allProducts));
     }
 
   }
