@@ -7,8 +7,9 @@ function Image(name, path) {
   this.shown = 0;
   this.clicked = 0;
   images.push(this);
-  imgPathArray.push(filepath);
-  title.push(name);
+  //imgPathArray.push(filepath);
+  //title.push(name);
+  var container = document.getElementById('clickableImage');
 }
 
 var images = [];
@@ -41,8 +42,9 @@ console.log(images);
 
 function picPicker() {
   var randomNumber = [];
-  while (randomNumber.length < 3) {
-    var random = Math.floor(Math.random() * (images.length - 1));
+  var random = Math.floor(Math.random() * (images.length - 1));
+
+  while (randomNumber.length < 2) {
     if (randomNumber.indexOf(random) === -1) {
       randomNumber.push(random);
     }
@@ -62,10 +64,12 @@ function randomPictures() {
   images[selected[0]].shown++;
 
 
+
   var img2 =  document.getElementById('second-image');
   img2.setAttribute('src', images[selected[1]].path);
   img2.setAttribute('name', images[selected[1]].name);
   images[selected[1]].shown++;
+
 
   var img3 =  document.getElementById('third-image');
   //var img3 = document.createElement('img');
@@ -82,7 +86,7 @@ function addEvent(event) {
   console.log(event.target.name);
   var targetVar = event.target.name;
 
-  for (var i = 0; i < images.length; i++) {
+  for (var i = 0; i < 25; i++) {
     var currentImage = images[i].name;
 
     if (currentImage === targetVar) {
@@ -90,6 +94,7 @@ function addEvent(event) {
       randomPictures();
       console.log(images[i]);
     }else{
+      container.removeEventListener('click', handleClick);
     }
 
   }
@@ -117,8 +122,8 @@ function handleClick (){
   randomImgGen();
   clicked++;
 
-  var productsArrayIdx = this.alt;
-  images[productsArrayIdx].countClicked++;
+  var productsArray2 = this.alt;
+  images[productsArray2].countClicked++;
 
   if (clicked >= 25) {
     img1.removeEventListener('click', handleClick);
@@ -131,11 +136,6 @@ function handleClick (){
     renderChart();
   }
 };
-
-img1.addEventListener('click', handleClick);
-img2.addEventListener('click', handleClick);
-img3.addEventListener('click', handleClick);
-
 
 function countClickedArrayPush (){
   for (var i = 0; i < images.length; i++) {
