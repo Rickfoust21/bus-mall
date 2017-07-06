@@ -7,6 +7,9 @@ function Image(name, path) {
   this.shown = 0;
   this.clicked = 0;
   images.push(this);
+  //imgPathArray.push(filepath);
+  //title.push(name);
+  var container = document.getElementById('clickableImage');
 }
 
 var images = [];
@@ -38,33 +41,35 @@ console.log(images);
 //generate three numbers randomly
 
 function picPicker() {
-  var random =   Math.floor(Math.random() * (images.length - 1));
-  console.log(random);
-  var random2 =  Math.floor(Math.random() * (images.length - 1));
-  console.log(random2);
-  var random3 =   Math.floor(Math.random() * (images.length - 1));
-  console.log(random3);
-  return [random, random2, random3];
-}
-// picPicker();
+  var randomNumber = [];
+  var random = Math.floor(Math.random() * (images.length - 1));
 
+  while (randomNumber.length < 2) {
+    if (randomNumber.indexOf(random) === -1) {
+      randomNumber.push(random);
+    }
+  }
+  return randomNumber;
+}
 //store each random number
 
 //take randomly generated numbers and push into an array.
 function randomPictures() {
   var selected = picPicker();
   console.log(selected);
-
-  var img1 =  document.getElementById('first-image');
+//print three pictures
+  var img1 = document.getElementById('first-image');
   img1.setAttribute('src', images[selected[0]].path);
   img1.setAttribute('name', images[selected[0]].name);
   images[selected[0]].shown++;
+
 
 
   var img2 =  document.getElementById('second-image');
   img2.setAttribute('src', images[selected[1]].path);
   img2.setAttribute('name', images[selected[1]].name);
   images[selected[1]].shown++;
+
 
   var img3 =  document.getElementById('third-image');
   //var img3 = document.createElement('img');
@@ -75,10 +80,13 @@ function randomPictures() {
 randomPictures();
 //randomPictures should run every time any picture is clicked on
 //make function to store randomPictures and a click event
+
+
 function addEvent(event) {
   console.log(event.target.name);
   var targetVar = event.target.name;
-  for (var i = 0; i < images.length; i++) {
+
+  for (var i = 0; i < 25; i++) {
     var currentImage = images[i].name;
 
     if (currentImage === targetVar) {
@@ -86,9 +94,12 @@ function addEvent(event) {
       randomPictures();
       console.log(images[i]);
     }else{
+      container.removeEventListener('click', handleClick);
     }
+
   }
 }
+
 var clickEl = document.getElementById('first-image');
 clickEl.addEventListener('click', addEvent);
 
@@ -100,8 +111,35 @@ clickEl3.addEventListener('click', addEvent);
 
 
 
-//print three pictures
+
 
 //track each click
 
 //turn off event listener after 25 clicks
+
+
+function handleClick (){
+  randomImgGen();
+  clicked++;
+
+  var productsArray2 = this.alt;
+  images[productsArray2].countClicked++;
+
+  if (clicked >= 25) {
+    img1.removeEventListener('click', handleClick);
+    img2.removeEventListener('click', handleClick);
+    img3.removeEventListener('click', handleClick);
+
+    var picSection = document.getElementById('imagechoices');
+    body.removeChild(picSection);
+    countClickedArrayPush();
+    renderChart();
+  }
+};
+
+function countClickedArrayPush (){
+  for (var i = 0; i < images.length; i++) {
+    countClickedArray.push(images[i].countClicked);
+    countShownArray.push(images[i].countShown);
+  }
+};
