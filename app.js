@@ -14,10 +14,9 @@ function Image(name, path) {
 }
 var images = [];
 
-
-if(localStorage.data) {
-  allProducts = JSON.parse(localStorage.data);
-} else {
+// if(localStorage.data) {
+//   allProducts = JSON.parse(localStorage.data);
+// } else {
 var bag = new Image('bag', './assets/bag.jpg');
 var bathroom = new Image('bathroom', './assets/bathroom.jpg');
 var breakfast = new Image('breakfast', './assets/breakfast.jpg');
@@ -38,7 +37,7 @@ var unicorn = new Image('unicorn', './assets/unicorn.jpg');
 var usb = new Image('usb', './assets/usb.gif');
 var watercan = new Image('watercan', './assets/water-can.jpg');
 var wineGlass = new Image('wineGlass', './assets/wine-glass.jpg');
-}
+
 console.log(images);
 
 
@@ -46,9 +45,9 @@ console.log(images);
 
 function picPicker() {
   var randomNumber = [];
-  var random = Math.floor(Math.random() * (images.length - 1));
 
   while (randomNumber.length < 2) {
+    var random = Math.floor(Math.random() * (images.length - 1));
     if (randomNumber.indexOf(random) === -1) {
       randomNumber.push(random);
     }
@@ -76,7 +75,6 @@ function randomPictures() {
 
 
   var img3 =  document.getElementById('third-image');
-  //var img3 = document.createElement('img');
   img3.setAttribute('src', images[selected[2]].path);
   img3.setAttribute('name', images[selected[2]].name);
   images[selected[2]].shown++;
@@ -258,4 +256,4 @@ function drawChart(){
 
 
 container.addEventListener('click', handleClick);
-myChart();
+//myChart();
